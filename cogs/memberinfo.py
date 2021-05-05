@@ -7,7 +7,7 @@ class memberinfo(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(aliases=['mi', 'ui'])
+    @commands.command(aliases=['mi'])
     async def memberinfo(self, ctx, member: discord.Member):
         """ fetches member info (must be in server). """
         name = member.name

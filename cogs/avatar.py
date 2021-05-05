@@ -7,7 +7,7 @@ class avatar(commands.Cog):
 
     @commands.command()
     async def avatar(self, ctx, *, user: discord.User=None):
-        """ Fetches a user's avatar (Must be in server)."""
+        """ Fetches a user's avatar (Must be in server- no need anymore)."""
         try:
             if not user:
                 usr = ctx.author.name
