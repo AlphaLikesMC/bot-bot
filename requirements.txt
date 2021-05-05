@@ -3,3 +3,4 @@ youtube-search-python
 pytube3
 youtube_dl
 lavalink
+timeago
