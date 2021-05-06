@@ -24,7 +24,7 @@ class Music(commands.Cog):
     def __init__(self, client):
         self.client = client
         self.client.lavalink = lavalink.Client(734507287598727270)
-        self.client.lavalink.add_node('https://idekidek.herokuapp.com/', 2333, 'youshallnotpass', 'eu', 'default-node')  # Host, Port, Password, Region, Name
+        self.client.lavalink.add_node('https://afternoon-oasis-57017.herokuapp.com/', 2333, 'YouShallNotPass', 'eu', 'default-node')  # Host, Port, Password, Region, Name
         self.client.add_listener(client.lavalink.voice_update_handler, 'on_socket_response')
         self.client.lavalink.add_event_hook(self.track_hook)
 
