@@ -1,2 +1,2 @@
 worker python bot.py
-web python3 lavalink.py
+web java -jar lavalink/Lavalink.jar
