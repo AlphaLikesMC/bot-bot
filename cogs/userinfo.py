@@ -9,7 +9,7 @@ class userinfo(commands.Cog):
 
     @commands.command(aliases=['ui'])
     async def getuser(self, ctx, *, user: discord.User=None):
-        """ fetches username and info from id (under development) """
+        """ fetches username and info from id. """
         try:
             if not user:
                 usr = ctx.author.name
