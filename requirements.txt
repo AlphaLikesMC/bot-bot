@@ -1,6 +1,6 @@
 discord.py
 youtube-search-python
-pytube3
+pytube
 youtube_dl
 lavalink
 timeago
