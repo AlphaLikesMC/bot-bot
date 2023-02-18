@@ -25,5 +25,5 @@ class emote(commands.Cog):
         f = matching_emote 
         await ctx.send(f)
 
-def setup(client):
-    client.add_cog(emote(client))
+async def setup(client):
+    await client.add_cog(emote(client))

@@ -73,5 +73,5 @@ class prefix(commands.Cog):
         emb = discord.Embed(title='Prefix changed!', colour=discord.Colour.green())
         await ctx.send(embed=emb)
 
-def setup(client):
-    client.add_cog(prefix(client))
+async def setup(client):
+    await client.add_cog(prefix(client))

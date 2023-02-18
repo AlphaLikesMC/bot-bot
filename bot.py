@@ -7,6 +7,8 @@ import time
 from pytube import YouTube
 import youtube_dl
 
+import asyncio
+
 import os
 import fnmatch
 import subprocess
@@ -19,13 +21,20 @@ def get_prefix(client, message):
         prefixes = json.load(f)
 
     return prefixes[str(message.guild.id)]
-     
-client = commands.Bot(command_prefix = get_prefix)
+
+#intents = discord.Intents(messages = True, guilds = True, reactions = True, members = True, presences = True)
+intents = discord.Intents().all()     
+ 
+client = commands.Bot(command_prefix = get_prefix, intents=intents)
 token = "NzM0NTA3Mjg3NTk4NzI3Mjcw.XxSvsA.uwnOQJoL-Hl4izoJNduaqhtperg"
 
-for filename in os.listdir(f'cogs'):
-    if filename.endswith('.py'):
-        client.load_extension(f'cogs.{filename[:-3]}')
+
+
+async def load_extensions():
+    for filename in os.listdir("./cogs"):
+        if filename.endswith(".py"):
+            # cut off the .py from the file name
+            await client.load_extension(f"cogs.{filename[:-3]}")
 
 
 '''@client.event
@@ -36,4 +45,11 @@ async def on_ready():
     #await channel.send('bot bot on!')
 '''
 
-client.run(token)
+async def main():
+    async with client:
+        await load_extensions()
+        await client.start(f'{token}')
+        
+
+asyncio.run(main())
+

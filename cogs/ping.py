@@ -26,5 +26,5 @@ class ping(commands.Cog):
         await self.client.process_commands(message)'''
 
 
-def setup(client):
-    client.add_cog(ping(client))
+async def setup(client):
+    await client.add_cog(ping(client))

@@ -13,12 +13,12 @@ class welp(commands.Cog):
     @commands.command()
     async def ols(self, ctx):
         """ gives server owner id(hopefully). """
-        await ctx.send(f'{int(ctx.message.guild.owner.id)}/n{ctx.message.guild.owner}')
+        await ctx.send(f'{int(ctx.message.guild.owner.id)}\n{ctx.message.guild.owner}')
 
     '''@commands.command()
     async def mar(self, ctx):
         await ctx.send(f'owo marry <@706762922369744976>')'''
 
     
-def setup(client):
-    client.add_cog(welp(client))
+async def setup(client):
+    await client.add_cog(welp(client))

@@ -190,6 +190,14 @@ class Music(commands.Cog):
             time.sleep(0.2)
             await player.play()
 
+    @play.error
+    async def play_error(self, ctx, error):
+        if isinstance(error, commands.BadArgument):
+            await ctx.send('**Error finding user...**')
+        else:
+            await ctx.send(error)
+
+ 
     '''@commands.command(aliases=['q'])
     async def queue(self, ctx, *, cmd=None):
         """Fetches the queue list. (no work proper)"""
@@ -328,5 +336,5 @@ class Music(commands.Cog):
 
 
 
-def setup(client):
-    client.add_cog(Music(client))
+async def setup(client):
+    await client.add_cog(Music(client))

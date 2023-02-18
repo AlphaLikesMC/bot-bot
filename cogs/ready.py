@@ -21,5 +21,8 @@ class on_ready(commands.Cog):
         await self.client.change_presence(activity=discord.Streaming(name="Boredom", url='https://www.youtube.com/watch?v=eLo33ZsZHbY'))
         print('Bot: {0.user} is ready!'.format(self.client))
 
-def setup(client):
-    client.add_cog(on_ready(client))
+'''def setup(client):
+    client.add_cog(on_ready(client))'''
+
+async def setup(client):
+    await client.add_cog(on_ready(client))

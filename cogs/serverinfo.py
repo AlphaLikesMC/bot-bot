@@ -13,7 +13,7 @@ class serverinfo(commands.Cog):
             return member.bot
 
         Name = ctx.message.guild.name
-        Reg = ctx.message.guild.region
+        #Reg = ctx.message.guild.region
         Server_id = ctx.message.guild.id
 
         People = int(len(ctx.message.guild.members))
@@ -28,13 +28,23 @@ class serverinfo(commands.Cog):
         own = ctx.message.guild.owner
         create = ctx.message.guild.created_at.strftime("%A, %B %d %Y @ %H:%M:%S %p")
         roles = int(len(ctx.message.guild.roles))
-        banners = ctx.message.guild.icon_url_as(format=None, static_format='webp', size=128)
+        banners = ctx.message.guild.icon.replace(format=None, static_format='webp', size=128)
 
         e = discord.Embed(title='Server Info',colour=discord.Colour.red())
         e.set_thumbnail(url=f'{banners}')
-        e.add_field(name=u"\u200B", value=f'Name: {Name}\nRegion: {Reg}\nID: {Server_id}\nDescription: {desc}\nCreated on: {create} UTC\nCreated by: {own}\nNo. of channels: {ch}\nNo. of voice channels: {voicech}\nNo. of members: {People} ({usersinserv} Users, {botsinserv_count} Bots)\nNo. of roles: {roles}')
+        e.add_field(name=u"\u200B", value=f'Name: {Name}\nID: {Server_id}\nDescription: {desc}\nCreated on: {create} UTC\nCreated by: {own}\nNo. of channels: {ch}\nNo. of voice channels: {voicech}\nNo. of members: {People} ({usersinserv} Users, {botsinserv_count} Bots)\nNo. of roles: {roles}')
         await ctx.send(embed=e)
 
+    @serverinfo.error
+    async def serverinfo_error(self, ctx, error):
+        if isinstance(error, commands.BadArgument):
+            await ctx.send('**Error finding server...**')
+        else:
+            await ctx.send(error)
 
-def setup(client):
-    client.add_cog(serverinfo(client))
+
+'''def setup(client):'''
+'''    client.add_cog(serverinfo(client))'''
+
+async def setup(client):
+    await client.add_cog(serverinfo(client))

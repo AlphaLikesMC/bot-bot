@@ -19,6 +19,8 @@ class announce(commands.Cog):
             say = await ctx.send(f'Nothing to announce')
             time.sleep(1)
             await say.delete()
+        else:
+            await ctx.send(error)
 
-def setup(client):
-    client.add_cog(announce(client))
+async def setup(client):
+    await client.add_cog(announce(client))

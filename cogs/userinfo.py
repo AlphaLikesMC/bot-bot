@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import timeago
-from datetime import datetime
+from datetime import datetime, timezone
 
 class userinfo(commands.Cog):
     def __init__(self, client):
@@ -17,10 +17,10 @@ class userinfo(commands.Cog):
                 descr = ctx.author.discriminator
         
                 created = ctx.author.created_at.strftime("%A, %B %d %Y @ %H:%M:%S %p")
-                pic = ctx.author.avatar_url_as(format=None, static_format='webp', size=128)
+                pic = ctx.author.avatar
 
                 createdago = ctx.author.created_at
-                now = datetime.now()
+                now = datetime.now(timezone.utc)
                 nowstr = now - createdago
 
                 embed = discord.Embed(title='User Info', colour=discord.Colour.dark_magenta())
@@ -28,7 +28,12 @@ class userinfo(commands.Cog):
                 embed.add_field(name='Discriminator:', value=f'{descr}',inline=True)
                 embed.add_field(name='ID:', value=f'{idr}', inline=True)
                 embed.add_field(name='Account Created on:', value=f'{created} ({timeago.format(nowstr)})')
-                embed.set_thumbnail(url=f'{pic}')
+                
+                if pic is None:
+                    embed.set_thumbnail(url='https://archive.org/download/discordprofilepictures/discordblue.png')
+                else:
+                    pic = ctx.author.avatar.replace(format=None, static_format='webp', size=128)
+                    embed.set_thumbnail(url=f'{pic}')
                 await ctx.send(embed=embed)
             else:
                 usr = user.display_name
@@ -36,10 +41,10 @@ class userinfo(commands.Cog):
                 descr = user.discriminator
 
                 created = user.created_at.strftime("%A, %B %d %Y @ %H:%M:%S %p")
-                pic = user.avatar_url_as(format=None, static_format='webp', size=128)
+                pic = user.avatar
 
                 createdago = user.created_at
-                now = datetime.now()
+                now = datetime.now(timezone.utc)
                 nowstr = now - createdago
 
                 embed = discord.Embed(title='User Info', colour=discord.Colour.dark_magenta())
@@ -47,7 +52,11 @@ class userinfo(commands.Cog):
                 embed.add_field(name='Discriminator:', value=f'{descr}',inline=True)
                 embed.add_field(name='ID:', value=f'{idr}', inline=True)
                 embed.add_field(name='Account Created on:', value=f'{created} ({timeago.format(nowstr)})')
-                embed.set_thumbnail(url=f'{pic}')
+                if pic is None:
+                    embed.set_thumbnail(url='https://archive.org/download/discordprofilepictures/discordblue.png')
+                else:
+                    pic = user.avatar.replace(format=None, static_format='webp', size=128)
+                    embed.set_thumbnail(url=f'{pic}')
                 await ctx.send(embed=embed)
         except Exception as err:
             await ctx.send(err)
@@ -57,5 +66,5 @@ class userinfo(commands.Cog):
         if isinstance(error, commands.BadArgument):
             await ctx.send('**Error finding user...**')
 
-def setup(client):
-    client.add_cog(userinfo(client))
+async def setup(client):
+    await client.add_cog(userinfo(client))
