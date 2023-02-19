@@ -26,7 +26,7 @@ def get_prefix(client, message):
 intents = discord.Intents().all()     
  
 client = commands.Bot(command_prefix = get_prefix, intents=intents)
-token = "NzM0NTA3Mjg3NTk4NzI3Mjcw.XxSvsA.uwnOQJoL-Hl4izoJNduaqhtperg"
+token = "NzM0NTA3Mjg3NTk4NzI3Mjcw.GwyJgq.8QbFgW6bLabMeZW4BuIMB8ygk8Ben_dZVy9O-U"
 
 
 

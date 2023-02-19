@@ -19,6 +19,17 @@ class admin(commands.Cog):
             embed = discord.Embed(title=f'Banned users', description=x, colour=discord.Colour.orange())
             await ctx.send(embed=embed)'''
 
+
+    @commands.command()
+    @commands.is_owner()
+    async def shutdown(self, ctx):
+        await ctx.send("Shutting down. ")
+        await self.client.close()
+
+    @shutdown.error
+    async def shutdown_err(self, ctx, error):
+        await ctx.send(error)
+
     @commands.command()
     @commands.is_owner()
     async def ban(self, ctx, *, member: discord.Member):
