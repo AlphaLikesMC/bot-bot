@@ -7,10 +7,10 @@ WORKDIR /app
 COPY . /app
 
 # Install Nginx
-RUN apt-get update && apt-get install -y nginx
+#RUN apt-get update && apt-get install -y nginx
 
 # Copy the Nginx configuration file
-COPY nginx.conf /etc/nginx/sites-available/default
+#COPY nginx.conf /etc/nginx/sites-available/default
 
 # Install dependencies
 RUN pip install -r requirements.txt
@@ -19,4 +19,4 @@ RUN pip install -r requirements.txt
 EXPOSE 80/tcp
 
 # Set the startup command
-CMD service nginx start && python bot.py
+CMD python bot.py
