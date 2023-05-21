@@ -16,6 +16,8 @@ import subprocess
 from discord.utils import get
 from discord import FFmpegPCMAudio
 
+from aiohttp import web
+
 def get_prefix(client, message):
     with open('jsons/prefixes.json', 'r') as f:
         prefixes = json.load(f)
@@ -49,8 +51,18 @@ async def on_ready():
 async def main():
     async with client:
         await load_extensions()
-        await client.start(token, port= 80)
         
+        # Create an HTTP server to bind to the desired port
+        app = web.Application()
+        runner = web.AppRunner(app)
+        await runner.setup()
+        site = web.TCPSite(runner, "0.0.0.0", port)
+        
+        # Start the HTTP server and the Discord bot together
+        await asyncio.gather(
+            client.start(token),
+            site.start()
+        )
 
 asyncio.run(main())
 
