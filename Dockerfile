@@ -15,5 +15,8 @@ COPY nginx.conf /etc/nginx/sites-available/default
 # Install dependencies
 RUN pip install -r requirements.txt
 
+# Expose port 80 as a TCP port
+EXPOSE 80/tcp
+
 # Set the startup command
 CMD service nginx start && python bot.py
