@@ -6,11 +6,8 @@ WORKDIR /app
 # Copy the application files to the container
 COPY . /app
 
-# Install Nginx
-#RUN apt-get update && apt-get install -y nginx
-
-# Copy the Nginx configuration file
-#COPY nginx.conf /etc/nginx/sites-available/default
+# Install Java
+RUN apt-get update && apt-get install -y default-jre
 
 # Install dependencies
 RUN pip install -r requirements.txt
@@ -18,5 +15,7 @@ RUN pip install -r requirements.txt
 # Expose port 80 as a TCP port
 EXPOSE 80/tcp
 
+EXPOSE 88
+
 # Set the startup command
-CMD python bot.py
+CMD sh -c "java -jar lavalink/Lavalink.jar & python bot.py"
