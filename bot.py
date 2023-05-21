@@ -49,7 +49,7 @@ async def on_ready():
 async def main():
     async with client:
         await load_extensions()
-        await client.start(token, bot=False, port= 80)
+        await client.start(token, port= 80)
         
 
 asyncio.run(main())
