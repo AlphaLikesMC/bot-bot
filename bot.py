@@ -27,6 +27,7 @@ intents = discord.Intents().all()
  
 client = commands.Bot(command_prefix = get_prefix, intents=intents)
 token = "NzM0NTA3Mjg3NTk4NzI3Mjcw.GwyJgq.8QbFgW6bLabMeZW4BuIMB8ygk8Ben_dZVy9O-U"
+port = 80
 
 
 
@@ -48,7 +49,7 @@ async def on_ready():
 async def main():
     async with client:
         await load_extensions()
-        await client.start(f'{token}')
+        await client.start(token, bot=False, port= 80)
         
 
 asyncio.run(main())
