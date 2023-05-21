@@ -15,7 +15,5 @@ RUN pip install -r requirements.txt
 # Expose port 80 as a TCP port
 EXPOSE 80/tcp
 
-EXPOSE 88
-
 # Set the startup command
 CMD sh -c "java -jar lavalink/Lavalink.jar & python bot.py"
